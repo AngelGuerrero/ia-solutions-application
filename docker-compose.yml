@@ -1,0 +1,28 @@
+version: '3'
+services:
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_DATABASE=ia-solutions
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=master
+      - MYSQL_ROOT_PASSWORD=master
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./app:/app
+    ports:
+      - '8000:8000'
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+
+volumes:
+  db_data:
