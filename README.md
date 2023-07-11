@@ -12,6 +12,10 @@
 
 `docker-compose up`
 
+### Ejecutar las migraciones
+
+`docker-compose exec web python manage.py migrate`
+
 ### Creación de los servicios construyendo el proyecto
 `docker-compose up --build`
 
